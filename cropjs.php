@@ -2140,12 +2140,14 @@ $(function () {
       var data = $(this).data(),
           $target,
           result;
+		  
+		  
 
       if (data.method) {
         data = $.extend({}, data); // Clone a new one
 
         if (typeof data.target !== 'undefined') {
-          $target = $(data.target);
+          $target = $(data.target);		  
 
           if (typeof data.option === 'undefined') {
             try {
@@ -2155,21 +2157,60 @@ $(function () {
             }
           }
         }
+		
+		var img_size_array = {};
 
+		if(data.option == 'allsizeimages')
+		{
+			for(var cr=5;cr<=20;cr++)
+			{	
+			data.option = { "width": cr, "height": cr };	
+							
+			result = $image.cropper(data.method, data.option);
+			
+			img_size_array[cr+'x'+cr] = result.toDataURL('image/jpeg');
+			}
+			
+			
+			//for croped image
+			var result_crop = $image.cropper('getData', data.option);
+
+			data.option = { "width": result_crop.width, "height":result_crop.height };
+			
+			var crop_det = $image.cropper(data.method, data.option);
+			
+			var crop_image = crop_det.toDataURL('image/jpeg');
+			
+			//for original image
+			
+			  var original_image = $("#orgiNalimage").val();
+			
+				$.ajax({
+				  url: "upload.php",
+				  data: {allsizeimages:img_size_array,crop_image:crop_image,original_image:original_image},
+				  type: 'post',
+				  success: function(data) {
+					
+				  }
+				});
+		}
+		else
+		{
+			
         result = $image.cropper(data.method, data.option);
-
-        if (data.method === 'getCroppedCanvas') {
-          $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
-        }
-
-        if ($.isPlainObject(result) && $target) {
-          try {
-            $target.val(JSON.stringify(result));
-          } catch (e) {
-            console.log(e.message);
-          }
-        }
-
+	
+			if (data.method === 'getCroppedCanvas') {
+			  $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+			}
+	
+			if ($.isPlainObject(result) && $target) {
+			  try {
+				$target.val(JSON.stringify(result));
+			  } catch (e) {
+				console.log(e.message);
+			  }
+			}
+		}	
       }
     }).on('keydown', function (e) {
 
@@ -2207,6 +2248,17 @@ $(function () {
       $inputImage.change(function () {
         var files = this.files,
             file;
+			
+	  if (this.files && this.files[0]) {
+		
+		var FR= new FileReader();
+		
+		FR.addEventListener("load", function(e) {
+		  $("#orgiNalimage").val(e.target.result);
+		}); 
+		
+		FR.readAsDataURL( this.files[0] );
+	  }
 
         if (files && files.length) {
           file = files[0];

@@ -5,9 +5,11 @@
     <title>Bootstrap Case</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="asset/bootstrap.min.css">
-    <script src="asset/jquery.min.js"></script>
-    <script src="asset/bootstrap.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>    
     <style>
     body {
       background-image: url("bg.png");
@@ -27,7 +29,7 @@
       <div class="col-md-9">
         <!-- <h3 class="page-header">Demo:</h3> -->
         <div class="img-container">
-          <img src="001.jpg" alt="Picture">
+          <img src="choose.jpg" alt="Picture">
         </div>
       </div>
       <div class="col-md-3">
@@ -146,20 +148,24 @@
 
         <div class="btn-group btn-group-crop">
           <button class="btn btn-primary" data-method="getCroppedCanvas" type="button">
-            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper("getCroppedCanvas")">
+            <span class="docs-tooltip" data-toggle="tooltip" title='$().cropper("getCroppedCanvas")'>
               Get Cropped Canvas
             </span>
           </button>
-          <button class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ "width": 160, "height": 90 }" type="button">
-            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper("getCroppedCanvas", { width: 160, height: 90 })">
+          <button class="btn btn-primary" data-method="getCroppedCanvas" data-option='{ "width": 160, "height": 90 }' type="button">
+            <span class="docs-tooltip" data-toggle="tooltip" title='$().cropper("getCroppedCanvas", { width: 160, height: 90 })'>
               160×90
             </span>
           </button>
-          <button class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ "width": 320, "height": 180 }" type="button">
-            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper("getCroppedCanvas", { width: 320, height: 180 })">
+          <button class="btn btn-primary" data-method="getCroppedCanvas" data-option='{ "width": 320, "height": 180 }' type="button">
+            <span class="docs-tooltip" data-toggle="tooltip" title='$().cropper("getCroppedCanvas", { width: 320, height: 180 })'>
               320×180
             </span>
           </button>
+          <button class="btn btn-primary" data-method="getCroppedCanvas" data-option='allsizeimages' type="button">
+          	All Images
+          </button>  
+          <input type="hidden" id="orgiNalimage" />
         </div>
 
         <!-- Show the cropped image in modal -->
